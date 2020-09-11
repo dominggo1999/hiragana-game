@@ -1,40 +1,46 @@
 import React, { useState,useEffect,useRef } from 'react'
-import { data } from './data';
+import { hiragana, katakana } from './data';
 import './App.scss';
 
 // Global interval
 let myInterval;
 
 const App = () => {
-  const [minutes, setMin] = useState(2);
+  const [minutes, setMin] = useState("02");
   const [seconds, setSec] = useState("00");
   const [score, setScore] = useState(0);
   const [question, setQuestion] = useState();
   const [value, setValue] = useState('');
   const [isActive, setIsActive] = useState(false);
+  const [timeIsOut, setTimeIsOut] = useState(false);
   const [correctAnswer, setCorrectAnswer] = useState("");
   const myRef = useRef();
 
   useEffect(() => {
     // Waktu habis
-    if(seconds===0 && minutes===0){
+    if(timeIsOut){
       reset();
       //Tampilkan score
-
     }
-  }, [seconds, minutes])
+  }, [timeIsOut])
 
   const startGame = (e) =>{
     e.preventDefault();
     if(!isActive){
       // Timer logic
-      let time = 120;
+      const m = 2; // Kali menit 
+      let time = 60 * m ;
       const tick = () =>{
         const updateMinutes = Math.floor(time/60) % 60;
         const updateSeconds = time % 60;
 
         setMin(updateMinutes);
         setSec(updateSeconds);
+
+        if(time===0){
+          setTimeIsOut(true);
+        }
+
         time-=1;
       } 
       myInterval = setInterval(tick,1000);
@@ -56,12 +62,16 @@ const App = () => {
 
   const reset = () =>{
       clearInterval(myInterval);
-      setMin("2");
+      setMin("00");
       setSec("00");
       setIsActive(false);
+      setValue('');
   }
 
   const renderQuestion = () =>{
+    // Pilih kana disini
+    // const data = [...hiragana,...katakana];
+    const data = hiragana;
     const randomNumber = Math.floor(Math.random() * data.length);
     const pickRandom = data[randomNumber];
     const rightAnswer = pickRandom.romaji;
@@ -94,15 +104,24 @@ const App = () => {
     setValue(e.target.value);
   }
 
+  const formatTime = (time) =>{
+      if(time.toString().length === 1 || time === 0){
+        time = "0" + time;
+      } 
+
+
+      return time 
+  }
+
   return (
     <div className="game-container">
       <div className="timer">
-        <p>0{minutes} : {seconds}</p>
-      </div>    
+        <p>{formatTime(minutes)} : {formatTime(seconds)}</p>
+      </div>   
 
       <div className="btn-container">
-        <button onClick={startGame}>Start</button>
-        <button onClick={reset}>Reset</button>
+        <button className="btn start" onClick={startGame}>Start</button>
+        <button className="btn reset" onClick={reset}>Reset</button>
       </div>
 
       {
@@ -116,7 +135,6 @@ const App = () => {
         : <p className="hiragana">ひらがな</p>
       }
 
-      
       <div className="score">Score:{score}</div>
     </div>
   )
@@ -124,3 +142,5 @@ const App = () => {
 
 export default App
 
+
+ 

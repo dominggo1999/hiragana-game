@@ -33,17 +33,78 @@
 	flex-direction: column;
 	background: #315185;
 
+	.timer{
+		color: 	#fff;
+		font-size: 	50px;
+		margin-bottom: 	20px;
+	}
+		
+	.btn-container{
+		margin-bottom: 20px;
+		display: flex;
+
+		.btn{
+			padding : 15px 20px;
+			font-size: 20px;
+			margin : 0 10px;
+			border-radius: 10px;
+			border: none;
+			outline: none;
+			cursor: pointer;
+
+			&:hover{
+				background: #212121;
+				color: 	#fff;
+			}
+		}
+	}
 	
 	#game {
-		.question{
+		.question, {
 			text-align: center;
 			font-family: 'Sakura';
 			font-size: 100px;
 			color: #fff;
 		}
+
+		form{	
+			display: flex;		
+			input{
+				background: none;
+				border-radius: 20px;
+				outline: none;
+				border : 2px solid #fff;
+				padding: 15px 15px;
+				font-size: 30px;
+				color: #fff;
+				text-align: center;
+				max-width: 150px;
+				width: 	150px;
+
+				@media screen and (min-width:200px){
+					max-width: 350px;
+					width: 250px;
+				}
+			}
+		}
+
 	}
 
 	.score{
-		color: #F79523;
+		margin-top: 20px;
+		color: #fff;
+		font-size: 40px;
+	}
+
+
+	.hiragana{
+		text-align: center;
+		font-family: 'Sakura';
+		color: #fff;
+		font-size: 70px;
+	}
+
+	@media screen and (min-width:500px){
+		font-size: 100px;
 	}
 }
