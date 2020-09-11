@@ -1,0 +1,10 @@
+1. Reset timer salah 
+2. Hasil input ke lowercase 
+3. Tambah jam kalau lebih dari 1 jam
+4. Tambah opsi waktu
+5. Tambah opsi katakana atau hiragana
+
+
+Backend
+1.Auth
+2.Record 

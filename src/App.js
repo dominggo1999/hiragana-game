@@ -39,6 +39,7 @@ const App = () => {
 
         if(time===0){
           setTimeIsOut(true);
+          setIsActive(false);
         }
 
         time-=1;
@@ -62,8 +63,8 @@ const App = () => {
 
   const reset = () =>{
       clearInterval(myInterval);
-      setMin("00");
-      setSec("00");
+      setMin(0);
+      setSec(0);
       setIsActive(false);
       setValue('');
   }
@@ -81,6 +82,9 @@ const App = () => {
   }
 
   const checkAnswer = (userInput) =>{
+    //Pastikan huruf kecil semua 
+    userInput = userInput.toLowerCase();
+
     if(userInput === correctAnswer){
       setScore(p=>p+1);
       return true
@@ -108,7 +112,6 @@ const App = () => {
       if(time.toString().length === 1 || time === 0){
         time = "0" + time;
       } 
-
 
       return time 
   }

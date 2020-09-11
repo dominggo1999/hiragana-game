@@ -17,6 +17,8 @@
   font-family: 'Sakura';
   font-style: normal;
   font-weight: bold;
+
+  // Setiap browser hanya akan parsing satu jenis tipe file
   src: 	local('/fonts/SakuraHiragana'),
   		url('/fonts/SakuraHiragana.woff2') format('woff2'), /* Super Modern Browsers */
        	url('/fonts/SakuraHiragana.woff') format('woff'), /* Modern Browsers */
@@ -32,6 +34,7 @@
 	align-items: center;
 	flex-direction: column;
 	background: #315185;
+	padding : 50px 0;
 
 	.timer{
 		color: 	#fff;
